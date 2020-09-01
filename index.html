@@ -3,93 +3,18 @@ if (session_id() == "")
 {
    session_start();
 }
-if (!isset($_SESSION['username']))
+if ($_SERVER['REQUEST_METHOD'] == 'POST')
 {
-   header('Location: ');
-   exit;
-}
-function ValidateEmail($email)
-{
-   $pattern = '/^([0-9a-z]([-.\w]*[0-9a-z])*@(([0-9a-z])+([-\w]*[0-9a-z])*\.)+[a-z]{2,6})$/i';
-   return preg_match($pattern, $email);
-}
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['formid']) && $_POST['formid'] == 'indexform1')
-{
-   $mailto = 'yadavmithun2001@gmail.com';
-   $mailfrom = isset($_POST['email']) ? $_POST['email'] : $mailto;
-   $subject = 'Website form';
-   $message = 'Values submitted from web site form:';
-   $success_url = './page1.html';
-   $error_url = '';
-   $eol = "\n";
-   $error = '';
-   $internalfields = array ("submit", "reset", "send", "filesize", "formid", "captcha_code", "recaptcha_challenge_field", "recaptcha_response_field", "g-recaptcha-response");
-   $boundary = md5(uniqid(time()));
-   $header  = 'From: '.$mailfrom.$eol;
-   $header .= 'Reply-To: '.$mailfrom.$eol;
-   $header .= 'MIME-Version: 1.0'.$eol;
-   $header .= 'Content-Type: multipart/mixed; boundary="'.$boundary.'"'.$eol;
-   $header .= 'X-Mailer: PHP v'.phpversion().$eol;
-
-   try
+   if (isset($_POST['captcha_code'],$_SESSION['random_txt']) && md5($_POST['captcha_code']) == $_SESSION['random_txt'])
    {
-      if (!ValidateEmail($mailfrom))
-      {
-         $error .= "The specified email address (" . $mailfrom . ") is invalid!\n<br>";
-         throw new Exception($error);
-      }
-      $message .= $eol;
-      $message .= "IP Address : ";
-      $message .= $_SERVER['REMOTE_ADDR'];
-      $message .= $eol;
-      foreach ($_POST as $key => $value)
-      {
-         if (!in_array(strtolower($key), $internalfields))
-         {
-            if (!is_array($value))
-            {
-               $message .= ucwords(str_replace("_", " ", $key)) . " : " . $value . $eol;
-            }
-            else
-            {
-               $message .= ucwords(str_replace("_", " ", $key)) . " : " . implode(",", $value) . $eol;
-            }
-         }
-      }
-      $body  = 'This is a multi-part message in MIME format.'.$eol.$eol;
-      $body .= '--'.$boundary.$eol;
-      $body .= 'Content-Type: text/plain; charset=ISO-8859-1'.$eol;
-      $body .= 'Content-Transfer-Encoding: 8bit'.$eol;
-      $body .= $eol.stripslashes($message).$eol;
-      if (!empty($_FILES))
-      {
-         foreach ($_FILES as $key => $value)
-         {
-             if ($_FILES[$key]['error'] == 0)
-             {
-                $body .= '--'.$boundary.$eol;
-                $body .= 'Content-Type: '.$_FILES[$key]['type'].'; name='.$_FILES[$key]['name'].$eol;
-                $body .= 'Content-Transfer-Encoding: base64'.$eol;
-                $body .= 'Content-Disposition: attachment; filename='.$_FILES[$key]['name'].$eol;
-                $body .= $eol.chunk_split(base64_encode(file_get_contents($_FILES[$key]['tmp_name']))).$eol;
-             }
-         }
-      }
-      $body .= '--'.$boundary.'--'.$eol;
-      if ($mailto != '')
-      {
-         mail($mailto, $subject, $body, $header);
-      }
-      header('Location: '.$success_url);
+      unset($_POST['captcha_code'],$_SESSION['random_txt']);
    }
-   catch (Exception $e)
+   else
    {
-      $errorcode = file_get_contents($error_url);
-      $replace = "##error##";
-      $errorcode = str_replace($replace, $e->getMessage(), $errorcode);
-      echo $errorcode;
+      echo '<b>The entered code was wrong.</b><br>';
+      echo '<a href="javascript:history.back()">Go Back</a>';
+      exit;
    }
-   exit;
 }
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -487,17 +412,25 @@ input:focus, textarea:focus, select:focus
    width: 100%;
    height: 100%;
 }
-#wb_indexForm1
+#wb_indexCaptcha1 span
 {
-   background-color: #FBFBFB;
-   background-image: none;
-   border: 0px solid #CCCCCC;
+   display: block;
+   overflow: hidden;
+   padding: 0 4px 0 5px;
 }
-#wb_indexForm2
+#indexCaptcha1
 {
-   background-color: #FBFBFB;
+   border: 1px solid #CCCCCC;
+   border-radius: 4px;
+   background-color: #FFFFFF;
    background-image: none;
-   border: 0px solid #CCCCCC;
+   color :#000000;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 13px;
+   padding: 1px 1px 1px 1px;
+   margin: 0;
+   text-align: left;
 }
 #wb_Shape1
 {
@@ -605,6 +538,12 @@ input:focus, textarea:focus, select:focus
    height: 58px;
    z-index: 20;
 }
+#indexCaptcha1
+{
+   margin-top: 39px;
+   width: calc(100% - 4px);
+   height: -5px;
+}
 #wb_indexImage1
 {
    position: absolute;
@@ -622,6 +561,15 @@ input:focus, textarea:focus, select:focus
    width: 453px;
    height: 27px;
    z-index: 6;
+}
+#wb_indexCaptcha1
+{
+   position: absolute;
+   left: 202px;
+   top: 446px;
+   width: 145px;
+   height: 100px;
+   z-index: 22;
 }
 #wb_Text10
 {
@@ -646,15 +594,6 @@ input:focus, textarea:focus, select:focus
    height: 563px;
    z-index: 3;
 }
-#wb_indexForm1
-{
-   position: absolute;
-   left: 921px;
-   top: 542px;
-   width: 371px;
-   height: 100px;
-   z-index: 23;
-}
 #wb_Shape5
 {
    position: absolute;
@@ -663,15 +602,6 @@ input:focus, textarea:focus, select:focus
    width: 194px;
    height: 136px;
    z-index: 12;
-}
-#wb_indexForm2
-{
-   position: absolute;
-   left: 938px;
-   top: 440px;
-   width: 337px;
-   height: 102px;
-   z-index: 24;
 }
 #wb_indexShape4
 {
@@ -1033,6 +963,27 @@ body
    margin: 0;
    padding: 0;
 }
+#wb_indexCaptcha1
+{
+   left: 93px;
+   top: 1015px;
+   width: 145px;
+   height: 100px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
+   padding: 1px 1px 1px 1px;
+   text-align: left;
+   color: #000000;
+   font-size: 13px;
+   font-family: Arial;
+   font-weight: normal;
+   font-style: normal;
+   text-decoration: none;
+   background-color: #FFFFFF;
+   background-image: none;
+   border-radius: 4px;
+}
 }
 </style>
 </head>
@@ -1097,15 +1048,8 @@ body
 <span style="color:#000000;font-family:Arial;font-size:64px;"><strong>FANCET 11</strong></span></div>
 <div id="wb_indexImage1">
 <img src="images/myimage%2dremovebg%2dpreview.png" id="indexImage1" alt=""></div>
-
-<div id="wb_indexForm1">
-<form name="indexForm1" method="post" action="<?php echo basename(__FILE__); ?>" enctype="multipart/form-data" id="indexForm1">
-<input type="hidden" name="formid" value="indexform1">
-</form>
-</div>
-<div id="wb_indexForm2">
-<form name="jdok" method="post" action="mailto:yadavmithun2001@gmail.com?subject=hello" enctype="multipart/form-data" id="indexForm2">
-</form>
-</div>
+<div id="wb_indexCaptcha1">
+<img src="indexcaptcha1.php" alt="Click for new image" title="Click for new image" style="cursor:pointer;float:left;width:100px;height:38px;" onclick="this.src='indexcaptcha1.php?'+Math.random()">
+<span><input type="text" id="indexCaptcha1" name="captcha_code" value="" spellcheck="false"></span></div>
 </body>
 </html>
