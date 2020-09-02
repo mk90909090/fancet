@@ -652,6 +652,11 @@ input:focus, textarea:focus, select:focus
    text-align: center;
    z-index: 7;
 }
+#indexPayPal1_form
+{
+   margin: 0;
+   padding: 0;
+}
 #wb_indexImage4
 {
    position: absolute;
@@ -696,6 +701,13 @@ input:focus, textarea:focus, select:focus
    width: 250px;
    height: 12px;
    z-index: 11;
+}
+#indexPayPal1
+{
+   position: absolute;
+   left: 220px;
+   top: 482px;
+   z-index: 32;
 }
 #wb_indexText5
 {
@@ -1261,6 +1273,14 @@ body
    background-image: none;
    border: 0px none #2E6DA4;
 }
+#indexPayPal1
+{
+   left: 202px;
+   top: 1111px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
+}
 }
 </style>
 </head>
@@ -1388,6 +1408,25 @@ var timer = setInterval(function()
 </li>
 </ul>
 </div>
+<form action="https://www.paypal.com/cgi-bin/webscr" id="indexPayPal1_form" method="post" target="PayPal">
+<input type="hidden" name="business" value="yadavmithun2001@gmail.com">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="item_name" value="csk">
+<input type="hidden" name="item_number" value="6564">
+<input type="hidden" name="amount" value="1">
+<input type="hidden" name="tax" value="0">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="shipping" value="">
+<input type="hidden" name="shipping2" value="">
+<input type="hidden" name="handling" value="">
+<input type="hidden" name="return" value="facebook.com">
+<input type="hidden" name="cancel_return" value="">
+<input type="hidden" name="undefined_quantity" value="0">
+<input type="hidden" name="receiver_email" value="yadavmithun2001@gmail.com">
+<input type="hidden" name="no_shipping" value="0">
+<input type="hidden" name="no_note" value="1">
+<input id="indexPayPal1" type="image" name="submit" src="images/x-click-but9.gif" alt="Make payments with PayPal, it's fast, free, and secure!">
+</form>
 </div>
 </body>
 </html>
