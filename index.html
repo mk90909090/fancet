@@ -1,22 +1,3 @@
-<?php
-if (session_id() == "")
-{
-   session_start();
-}
-if ($_SERVER['REQUEST_METHOD'] == 'POST')
-{
-   if (isset($_POST['captcha_code'],$_SESSION['random_txt']) && md5($_POST['captcha_code']) == $_SESSION['random_txt'])
-   {
-      unset($_POST['captcha_code'],$_SESSION['random_txt']);
-   }
-   else
-   {
-      echo '<b>The entered code was wrong.</b><br>';
-      echo '<a href="javascript:history.back()">Go Back</a>';
-      exit;
-   }
-}
-?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -68,7 +49,7 @@ input:focus, textarea:focus, select:focus
 #indexShape3
 {
    width: 1278px;
-   height: 122px;
+   height: 68px;
    background-color: #FFFF57;
    background-image: none;
    border: 0px #003264 solid;
@@ -80,238 +61,11 @@ input:focus, textarea:focus, select:focus
 }
 #Shape1
 {
-   width: 794px;
-   height: 615px;
-   background-color: #50A2E6;
-   background: linear-gradient(to bottom, #50A2E6 0%, #0066CC 100%);
-   border: 3px #003264 solid;
-}
-#wb_Shape2
-{
-   transform: rotate(0deg);
-   transform-origin: 50% 50%;
-}
-#Shape2
-{
-   width: 194px;
-   height: 556px;
-   background-color: #0066CC;
-   background-image: none;
-   border: 3px #003264 solid;
-}
-#wb_Shape4
-{
-   transform: rotate(0deg);
-   transform-origin: 50% 50%;
-}
-#Shape4
-{
-   width: 522px;
-   height: 557px;
-   background-color: #FFFFFF;
-   background-image: none;
-   border: 3px #003264 solid;
-}
-#NavigationBar2 ul.navbar
-{
-   list-style: none;
-   margin: 0;
-   padding: 0;
-}
-#NavigationBar2 ul.navbar li
-{
-   height: 25px;
-   width: 154px;
-   margin: 0 0 10px 0;
-   vertical-align: bottom;
-}
-#NavigationBar2 ul.navbar li a
-{
-   display: block;
-   position: relative;
-}
-#NavigationBar2 ul.navbar li a img
-{
-   position: absolute;
-   left: 0;
-   z-index: 1;
-   border-width: 0;
-}
-#NavigationBar2 ul.navbar li span
-{
-   display: block;
-   height: 25px;
-   width: 154px;
-   position: absolute;
-   z-index: 2;
-}
-#NavigationBar2 a .hover
-{
-   visibility: hidden;
-}
-#NavigationBar2 a:hover .hover
-{
-   visibility: visible;
-}
-#NavigationBar2 a:hover span
-{
-   visibility: hidden;
-}
-#wb_indexShape1
-{
-   transform: rotate(0deg);
-   transform-origin: 50% 50%;
-}
-#indexShape1
-{
-   border-width: 0;
-   vertical-align: top;
-}
-#wb_Text2 
-{
-   background-color: transparent;
-   background-image: none;
-   border: 0px solid #000000;
-   padding: 0;
-   margin: 0;
-   text-align: left;
-}
-#wb_Text2 div
-{
-   text-align: left;
-}
-#wb_indexShape5
-{
-   transform: rotate(0deg);
-   transform-origin: 50% 50%;
-}
-#indexShape5
-{
-   width: 330px;
-   height: 26px;
-   background-color: transparent;
-   background-image: url(images/index_indexShape5_bkgrnd.png);
-   background-repeat: repeat;
-   background-position: left top;
-   border: 2px #003264 solid;
-}
-#wb_Text7 
-{
-   background-color: transparent;
-   background-image: none;
-   border: 0px solid #000000;
-   padding: 0;
-   margin: 0;
-   text-align: left;
-}
-#wb_Text7 div
-{
-   text-align: left;
-}
-#wb_Text6 
-{
-   background-color: transparent;
-   background-image: none;
-   border: 0px solid #000000;
-   padding: 0;
-   margin: 0;
-   text-align: left;
-}
-#wb_Text6 div
-{
-   text-align: left;
-}
-#wb_Image5
-{
-   vertical-align: top;
-}
-#Image5
-{
-   border: 2px solid #000000;
-   padding: 0;
-   margin: 0;
-   left: 0;
-   top: 0;
-   width: 100%;
-   height: 100%;
-}
-#wb_Image6
-{
-   vertical-align: top;
-}
-#Image6
-{
-   border: 3px solid #000000;
-   padding: 0;
-   margin: 0;
-   left: 0;
-   top: 0;
-   width: 100%;
-   height: 100%;
-}
-#wb_Shape5
-{
-   transform: rotate(0deg);
-   transform-origin: 50% 50%;
-}
-#Shape5
-{
-   border-width: 0;
-   vertical-align: top;
-}
-#wb_Text8 
-{
-   background-color: transparent;
-   background-image: none;
-   border: 0px solid #000000;
-   padding: 0;
-   margin: 0;
-   text-align: center;
-}
-#wb_Text8 div
-{
-   text-align: center;
-}
-#wb_indexShape4
-{
-   transform: rotate(0deg);
-   transform-origin: 50% 50%;
-}
-#indexShape4
-{
-   width: 330px;
-   height: 26px;
-   background-color: transparent;
-   background-image: url(images/index_indexShape4_bkgrnd.png);
-   background-repeat: repeat;
-   background-position: left top;
-   border: 2px #003264 solid;
-}
-#wb_Text9 
-{
-   background-color: transparent;
-   background-image: none;
-   border: 0px solid #000000;
-   padding: 0;
-   margin: 0;
-   text-align: left;
-}
-#wb_Text9 div
-{
-   text-align: left;
-}
-#wb_Text10 
-{
-   background-color: transparent;
-   background-image: none;
-   border: 0px solid #000000;
-   padding: 0;
-   margin: 0;
-   text-align: left;
-}
-#wb_Text10 div
-{
-   text-align: left;
+   width: 1278px;
+   height: 959px;
+   background-color: #800080;
+   background: linear-gradient(to bottom, #800080 0%, #800080 100%);
+   border: 0px #003264 solid;
 }
 #wb_Image1
 {
@@ -327,19 +81,6 @@ input:focus, textarea:focus, select:focus
    width: 100%;
    height: 100%;
 }
-#wb_indexText1 
-{
-   background-color: transparent;
-   background-image: none;
-   border: 0px solid #000000;
-   padding: 0;
-   margin: 0;
-   text-align: right;
-}
-#wb_indexText1 div
-{
-   text-align: right;
-}
 #NavigationBar1 ul.navbar
 {
    list-style: none;
@@ -348,8 +89,8 @@ input:focus, textarea:focus, select:focus
 }
 #NavigationBar1 ul.navbar li
 {
-   height: 25px;
-   width: 274px;
+   height: 30px;
+   width: 130px;
    margin: 0 0 2px 0;
    vertical-align: bottom;
 }
@@ -368,8 +109,8 @@ input:focus, textarea:focus, select:focus
 #NavigationBar1 ul.navbar li span
 {
    display: block;
-   height: 25px;
-   width: 274px;
+   height: 30px;
+   width: 130px;
    position: absolute;
    z-index: 2;
 }
@@ -385,7 +126,163 @@ input:focus, textarea:focus, select:focus
 {
    visibility: hidden;
 }
+#wb_indexText2 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexText2 div
+{
+   text-align: center;
+}
+#wb_indexCssMenu1
+{
+   border: 0px solid #C0C0C0;
+   background-color: transparent;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexCssMenu1 ul
+{
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+   position: relative;
+   display: inline-block;
+}
+#wb_indexCssMenu1 li
+{
+   float: left;
+   margin: 0;
+   padding: 0px 4px 0px 0px;
+}
+#wb_indexCssMenu1 a
+{
+   display: block;
+   float: left;
+   color: #FFFFFF;
+   border: 1px solid #CCCCCC;
+   background-color: #800080;
+   background-image: none;
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 16px;
+   font-style: normal;
+   text-decoration: none;
+   height: 26px;
+   line-height: 26px;
+   padding: 0px 5px 0px 5px;
+   vertical-align: middle;
+   text-align: center;
+}
+#wb_indexCssMenu1 li:hover a, #wb_indexCssMenu1 a:hover
+{
+   color: #FFFFFF;
+   background-color: #337AB7;
+   background-image: none;
+   border: 1px solid #2E6DA4;
+}
+#wb_indexCssMenu1 li.firstmain
+{
+   padding-left: 0px;
+}
+#wb_indexCssMenu1 li.lastmain
+{
+   padding-right: 0px;
+}
+#wb_indexCssMenu1 br
+{
+   clear: both;
+   font-size: 1px;
+   height: 0;
+   line-height: 0;
+}
+#indexButton1
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 16px;
+   -webkit-appearance: none;
+   margin: 0;
+}
+#indexButton2
+{
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 16px;
+   -webkit-appearance: none;
+   margin: 0;
+}
+#wb_indexText1 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexText1 div
+{
+   text-align: center;
+}
 #wb_indexText3 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexText3 div
+{
+   text-align: center;
+}
+#indexButton3
+{
+   border: 2px solid #FFFF57;
+   border-radius: 2px;
+   background-color: #FFFFFF;
+   background-image: none;
+   color: #800080;
+   font-family: "Arial Narrow";
+   font-weight: bold;
+   font-size: 21px;
+   -webkit-appearance: none;
+   margin: 0;
+}
+#indexButton4
+{
+   border: 2px solid #FFFF57;
+   border-radius: 2px;
+   background-color: #FFFFFF;
+   background-image: none;
+   color: #800080;
+   font-family: "Arial Narrow";
+   font-weight: bold;
+   font-size: 21px;
+   -webkit-appearance: none;
+   margin: 0;
+}
+#indexButton5
+{
+   border: 2px solid #FFFF57;
+   border-radius: 2px;
+   background-color: #FFFFFF;
+   background-image: none;
+   color: #800080;
+   font-family: "Arial Narrow";
+   font-weight: bold;
+   font-size: 21px;
+   -webkit-appearance: none;
+   margin: 0;
+}
+#wb_indexText4 
 {
    background-color: transparent;
    background-image: none;
@@ -394,9 +291,52 @@ input:focus, textarea:focus, select:focus
    margin: 0;
    text-align: left;
 }
-#wb_indexText3 div
+#wb_indexText4 div
 {
    text-align: left;
+}
+#wb_indexShape1
+{
+   transform: rotate(0deg);
+   transform-origin: 50% 50%;
+}
+#indexShape1
+{
+   border-width: 0;
+   vertical-align: top;
+}
+#wb_indexText5 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: left;
+}
+#wb_indexText5 div
+{
+   text-align: left;
+}
+#wb_indexShape2
+{
+   transform: rotate(0deg);
+   transform-origin: 50% 50%;
+}
+#indexShape2
+{
+   border-width: 0;
+   vertical-align: top;
+}
+#wb_indexShape4
+{
+   transform: rotate(0deg);
+   transform-origin: 50% 50%;
+}
+#indexShape4
+{
+   border-width: 0;
+   vertical-align: top;
 }
 #wb_indexImage1
 {
@@ -412,57 +352,254 @@ input:focus, textarea:focus, select:focus
    width: 100%;
    height: 100%;
 }
-#wb_indexCaptcha1 span
+#wb_indexImage2
 {
-   display: block;
-   overflow: hidden;
-   padding: 0 4px 0 5px;
+   vertical-align: top;
 }
-#indexCaptcha1
+#indexImage2
 {
-   border: 1px solid #CCCCCC;
-   border-radius: 4px;
-   background-color: #FFFFFF;
-   background-image: none;
-   color :#000000;
-   font-family: Arial;
-   font-weight: normal;
-   font-size: 13px;
-   padding: 1px 1px 1px 1px;
+   border: 0px solid #000000;
+   padding: 0;
    margin: 0;
-   text-align: left;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_indexText6 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexText6 div
+{
+   text-align: center;
+}
+#wb_indexText7 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexText7 div
+{
+   text-align: center;
+}
+#wb_indexText8 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexText8 div
+{
+   text-align: center;
+}
+#indexButton6
+{
+   font-family: "Arial Narrow";
+   font-weight: normal;
+   font-size: 19px;
+   -webkit-appearance: none;
+   margin: 0;
+}
+#wb_indexImage3
+{
+   vertical-align: top;
+}
+#indexImage3
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_indexImage4
+{
+   vertical-align: top;
+}
+#indexImage4
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_indexText9 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexText9 div
+{
+   text-align: center;
+}
+#wb_indexText10 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexText10 div
+{
+   text-align: center;
+}
+#wb_indexText11 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexText11 div
+{
+   text-align: center;
+}
+#wb_indexText12 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexText12 div
+{
+   text-align: center;
+}
+#indexButton8
+{
+   font-family: "Arial Narrow";
+   font-weight: normal;
+   font-size: 19px;
+   -webkit-appearance: none;
+   margin: 0;
+}
+#indexShape2
+{
+   width: 302px;
+   height: 153px;
+}
+#wb_indexCssMenu1
+{
+   position: absolute;
+   left: 443px;
+   top: 20px;
+   width: 578px;
+   height: 28px;
+   z-index: 5;
 }
 #wb_Shape1
 {
    position: absolute;
    left: 0px;
-   top: 157px;
-   width: 800px;
-   height: 621px;
+   top: 68px;
+   width: 1278px;
+   height: 959px;
    z-index: 1;
-}
-#wb_Shape2
-{
-   position: absolute;
-   left: 25px;
-   top: 184px;
-   width: 200px;
-   height: 562px;
-   z-index: 2;
 }
 #wb_Image1
 {
    position: absolute;
-   left: 25px;
-   top: 15px;
-   width: 108px;
-   height: 92px;
-   z-index: 17;
+   left: 12px;
+   top: 4px;
+   width: 70px;
+   height: 60px;
+   z-index: 2;
 }
 #indexShape1
 {
-   width: 505px;
-   height: 72px;
+   width: 302px;
+   height: 153px;
+}
+#indexButton8
+{
+   position: absolute;
+   left: 597px;
+   top: 312px;
+   width: 105px;
+   height: 27px;
+   z-index: 32;
+}
+#indexButton6
+{
+   position: absolute;
+   left: 182px;
+   top: 312px;
+   width: 105px;
+   height: 27px;
+   z-index: 23;
+}
+#indexButton5
+{
+   position: absolute;
+   left: 1004px;
+   top: 135px;
+   width: 197px;
+   height: 37px;
+   z-index: 12;
+}
+#indexButton4
+{
+   position: absolute;
+   left: 532px;
+   top: 135px;
+   width: 197px;
+   height: 37px;
+   z-index: 11;
+}
+#indexButton3
+{
+   position: absolute;
+   left: 84px;
+   top: 135px;
+   width: 136px;
+   height: 37px;
+   z-index: 10;
+}
+#indexButton2
+{
+   position: absolute;
+   left: 1163px;
+   top: 20px;
+   width: 86px;
+   height: 27px;
+   z-index: 7;
+}
+#indexButton1
+{
+   position: absolute;
+   left: 1059px;
+   top: 22px;
+   width: 86px;
+   height: 26px;
+   z-index: 6;
 }
 #NavigationBar1
 {
@@ -470,175 +607,233 @@ input:focus, textarea:focus, select:focus
    visibility: hidden;
    left: 31px;
    top: 191px;
-   width: 274px;
-   height: 162px;
-   z-index: 19;
+   width: 130px;
+   height: 160px;
+   z-index: 3;
 }
-#NavigationBar2
+#wb_indexText12
 {
    position: absolute;
-   left: 48px;
-   top: 202px;
-   width: 154px;
-   height: 210px;
-   z-index: 4;
+   left: 122px;
+   top: 646px;
+   width: 81px;
+   height: 42px;
+   text-align: center;
+   z-index: 31;
 }
-#wb_Text6
+#wb_indexText11
 {
    position: absolute;
-   left: 426px;
-   top: 501px;
-   width: 283px;
-   height: 19px;
-   z-index: 9;
+   left: 734px;
+   top: 317px;
+   width: 63px;
+   height: 26px;
+   text-align: center;
+   z-index: 30;
+}
+#wb_indexText10
+{
+   position: absolute;
+   left: 506px;
+   top: 317px;
+   width: 63px;
+   height: 26px;
+   text-align: center;
+   z-index: 29;
+}
+#countdown
+{
+   color: #FF0000;
+   font-size: 17px;
+   font-family: "Arial Narrow";
+   font-weight: normal;
+   font-style: normal;
+   text-align: left;
+   text-decoration: none;
 }
 #wb_indexText1
 {
    position: absolute;
-   left: 642px;
-   top: 132px;
-   width: 129px;
-   height: 18px;
-   text-align: right;
-   z-index: 18;
-}
-#wb_Image5
-{
-   position: absolute;
-   left: 271px;
-   top: 278px;
-   width: 135px;
-   height: 188px;
-   z-index: 10;
-}
-#wb_Text7
-{
-   position: absolute;
-   left: 420px;
-   top: 315px;
-   width: 333px;
-   height: 149px;
+   left: 84px;
+   top: 48px;
+   width: 255px;
+   height: 12px;
+   text-align: center;
    z-index: 8;
 }
-#wb_Image6
+#wb_indexJavaScript2
 {
    position: absolute;
-   left: 271px;
-   top: 495px;
-   width: 135px;
-   height: 188px;
-   z-index: 11;
+   left: 505px;
+   top: 374px;
+   width: 288px;
+   height: 26px;
+   z-index: 25;
+}
+#wb_indexText2
+{
+   position: absolute;
+   left: 79px;
+   top: 0px;
+   width: 267px;
+   height: 43px;
+   text-align: center;
+   z-index: 4;
+}
+#wb_indexJavaScript1
+{
+   position: absolute;
+   left: 91px;
+   top: 376px;
+   width: 286px;
+   height: 22px;
+   z-index: 24;
 }
 #wb_indexText3
 {
    position: absolute;
-   left: 166px;
-   top: 32px;
-   width: 417px;
-   height: 58px;
-   z-index: 20;
+   left: 12px;
+   top: 86px;
+   width: 1237px;
+   height: 22px;
+   text-align: center;
+   z-index: 9;
 }
-#indexCaptcha1
+#wb_indexImage4
 {
-   margin-top: 39px;
-   width: calc(100% - 4px);
-   height: -5px;
+   position: absolute;
+   left: 737px;
+   top: 260px;
+   width: 56px;
+   height: 54px;
+   z-index: 27;
+}
+#wb_indexImage3
+{
+   position: absolute;
+   left: 505px;
+   top: 249px;
+   width: 65px;
+   height: 65px;
+   z-index: 26;
+}
+#wb_indexImage2
+{
+   position: absolute;
+   left: 307px;
+   top: 248px;
+   width: 77px;
+   height: 66px;
+   z-index: 19;
 }
 #wb_indexImage1
 {
    position: absolute;
-   left: 942px;
-   top: 145px;
-   width: 315px;
-   height: 315px;
+   left: 91px;
+   top: 249px;
+   width: 77px;
+   height: 64px;
+   z-index: 18;
+}
+#wb_indexText4
+{
+   position: absolute;
+   left: 242px;
+   top: 408px;
+   width: 250px;
+   height: 12px;
+   z-index: 13;
+}
+#wb_indexText5
+{
+   position: absolute;
+   left: 83px;
+   top: 228px;
+   width: 257px;
+   height: 16px;
+   z-index: 15;
+}
+#wb_indexText6
+{
+   position: absolute;
+   left: 98px;
+   top: 317px;
+   width: 63px;
+   height: 26px;
+   text-align: center;
+   z-index: 20;
+}
+#wb_indexText7
+{
+   position: absolute;
+   left: 314px;
+   top: 317px;
+   width: 63px;
+   height: 26px;
+   text-align: center;
    z-index: 21;
 }
-#wb_Text2
+#wb_indexText8
 {
    position: absolute;
-   left: 301px;
-   top: 214px;
-   width: 453px;
-   height: 27px;
-   z-index: 6;
-}
-#wb_indexCaptcha1
-{
-   position: absolute;
-   left: 202px;
-   top: 446px;
-   width: 145px;
-   height: 100px;
+   left: 193px;
+   top: 260px;
+   width: 81px;
+   height: 42px;
+   text-align: center;
    z-index: 22;
 }
-#wb_Text10
+#wb_indexText9
 {
    position: absolute;
-   left: 426px;
-   top: 284px;
-   width: 283px;
-   height: 19px;
-   z-index: 16;
+   left: 609px;
+   top: 260px;
+   width: 81px;
+   height: 42px;
+   text-align: center;
+   z-index: 28;
 }
-#Shape5
+#countdown-days
 {
-   width: 194px;
-   height: 136px;
+   color: #FF0000;
+   font-size: 17px;
+   font-family: "Arial Narrow";
+   font-weight: normal;
+   font-style: normal;
+   text-align: center;
+   text-decoration: none;
 }
-#wb_Shape4
+#indexShape4
 {
-   position: absolute;
-   left: 247px;
-   top: 183px;
-   width: 528px;
-   height: 563px;
-   z-index: 3;
-}
-#wb_Shape5
-{
-   position: absolute;
-   left: 28px;
-   top: 606px;
-   width: 194px;
-   height: 136px;
-   z-index: 12;
+   width: 302px;
+   height: 153px;
 }
 #wb_indexShape4
 {
    position: absolute;
-   left: 420px;
-   top: 278px;
-   width: 334px;
-   height: 30px;
-   z-index: 14;
+   left: 899px;
+   top: 249px;
+   width: 302px;
+   height: 153px;
+   z-index: 17;
 }
-#wb_Text8
+#wb_indexShape2
 {
    position: absolute;
-   left: 34px;
-   top: 693px;
-   width: 183px;
-   height: 36px;
-   text-align: center;
-   z-index: 13;
-}
-#wb_indexShape5
-{
-   position: absolute;
-   left: 420px;
-   top: 495px;
-   width: 334px;
-   height: 30px;
-   z-index: 7;
+   left: 498px;
+   top: 249px;
+   width: 302px;
+   height: 153px;
+   z-index: 16;
 }
 #wb_indexShape1
 {
    position: absolute;
-   left: 266px;
-   top: 202px;
-   width: 505px;
-   height: 72px;
-   z-index: 5;
+   left: 82px;
+   top: 249px;
+   width: 302px;
+   height: 153px;
+   z-index: 14;
 }
 #wb_indexShape3
 {
@@ -646,17 +841,8 @@ input:focus, textarea:focus, select:focus
    left: 0px;
    top: 0px;
    width: 1278px;
-   height: 122px;
+   height: 68px;
    z-index: 0;
-}
-#wb_Text9
-{
-   position: absolute;
-   left: 420px;
-   top: 532px;
-   width: 333px;
-   height: 192px;
-   z-index: 15;
 }
 @media only screen and (max-width: 799px)
 {
@@ -668,7 +854,7 @@ body
 #wb_indexShape3
 {
    left: 0px;
-   top: 10px;
+   top: 0px;
    width: 320px;
    height: 87px;
    visibility: visible;
@@ -679,310 +865,449 @@ body
 {
    width: 320px;
    height: 87px;
-   background-color: #0568CE;
-   background-image: none;
 }
 #wb_Shape1
 {
    left: 0px;
-   top: 104px;
+   top: 87px;
    width: 320px;
-   height: 872px;
+   height: 1393px;
    visibility: visible;
    display: inline;
    margin: 0;
 }
 #Shape1
 {
-   width: 314px;
-   height: 866px;
+   width: 320px;
+   height: 1393px;
 }
-#wb_Shape2
+#wb_Image1
 {
    left: 10px;
-   top: 113px;
-   width: 302px;
-   height: 189px;
+   top: 0px;
+   width: 56px;
+   height: 53px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
+   padding: 0;
+}
+#NavigationBar1
+{
+   left: 96px;
+   top: 87px;
    visibility: visible;
    display: inline;
    margin: 0;
 }
-#Shape2
+#wb_indexText2
 {
-   width: 296px;
-   height: 183px;
-   background-color: #0066CC;
+   left: 57px;
+   top: 0px;
+   width: 241px;
+   height: 43px;
+   visibility: visible;
+   display: inline;
+   background-color: transparent;
    background-image: none;
 }
-#wb_Shape4
+#wb_indexText2
 {
-   left: 10px;
-   top: 309px;
-   width: 302px;
-   height: 596px;
+   margin: 0;
+   padding: 0;
+}
+#wb_indexCssMenu1
+{
+   left: 443px;
+   top: 20px;
+   visibility: visible;
+   display: block;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexCssMenu1 li
+{
+}
+#wb_indexCssMenu1 a
+{
+   color: #FFFFFF;
+   border: 1px solid #CCCCCC;
+   background-color: #800080;
+   background-image: none;
+   font-family: Arial;
+   font-weight: bold;
+   font-size: 16px;
+   font-style: normal;
+   text-decoration: none;
+   height: 26px;
+   line-height: 26px;
+   text-align: center;
+}
+#wb_indexCssMenu1 li:hover a, #wb_indexCssMenu1 a:hover
+{
+   color: #FFFFFF;
+   background-color: #337AB7;
+   background-image: none;
+   border: 1px solid #2E6DA4;
+}
+#indexButton1
+{
+   left: 226px;
+   top: 62px;
+   width: 86px;
+   height: 25px;
    visibility: visible;
    display: inline;
    margin: 0;
 }
-#Shape4
+#indexButton2
 {
-   width: 296px;
-   height: 590px;
-}
-#NavigationBar2
-{
-   left: 31px;
-   top: 191px;
-   visibility: hidden;
-   display: none;
+   left: 10px;
+   top: 62px;
+   width: 86px;
+   height: 25px;
+   visibility: visible;
+   display: inline;
    margin: 0;
+}
+#wb_indexText1
+{
+   left: 57px;
+   top: 48px;
+   width: 255px;
+   height: 12px;
+   visibility: visible;
+   display: inline;
+   background-color: transparent;
+   background-image: none;
+}
+#wb_indexText1
+{
+   margin: 0;
+   padding: 0;
+}
+#wb_indexText3
+{
+   left: 20px;
+   top: 255px;
+   width: 283px;
+   height: 65px;
+   visibility: visible;
+   display: inline;
+   background-color: transparent;
+   background-image: none;
+}
+#wb_indexText3
+{
+   margin: 0;
+   padding: 0;
+}
+#indexButton3
+{
+   left: 10px;
+   top: 330px;
+   width: 117px;
+   height: 37px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
+   color: #800080;
+   font-size: 21px;
+   font-family: "Arial Narrow";
+   font-weight: bold;
+   font-style: normal;
+   text-decoration: none;
+   background-color: #FFFFFF;
+   background-image: none;
+   border-radius: 2px;
+}
+#indexButton4
+{
+   left: 77px;
+   top: 379px;
+   width: 169px;
+   height: 34px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
+   color: #800080;
+   font-size: 21px;
+   font-family: "Arial Narrow";
+   font-weight: bold;
+   font-style: normal;
+   text-decoration: none;
+   background-color: #FFFFFF;
+   background-image: none;
+   border-radius: 2px;
+}
+#indexButton5
+{
+   left: 152px;
+   top: 330px;
+   width: 160px;
+   height: 37px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
+   color: #800080;
+   font-size: 21px;
+   font-family: "Arial Narrow";
+   font-weight: bold;
+   font-style: normal;
+   text-decoration: none;
+   background-color: #FFFFFF;
+   background-image: none;
+   border-radius: 2px;
+}
+#wb_indexText4
+{
+   left: 242px;
+   top: 408px;
+   width: 250px;
+   height: 12px;
+   visibility: visible;
+   display: inline;
+   background-color: transparent;
+   background-image: none;
+}
+#wb_indexText4
+{
+   margin: 0;
+   padding: 0;
 }
 #wb_indexShape1
 {
-   left: 266px;
-   top: 202px;
-   visibility: hidden;
-   display: none;
-   margin: 0;
-}
-#wb_Text2
-{
-   left: 286px;
-   top: 217px;
-   width: 453px;
-   height: 29px;
-   visibility: hidden;
-   display: none;
-   background-color: transparent;
-   background-image: none;
-}
-#wb_Text2
-{
-   margin: 0;
-   padding: 0;
-}
-#wb_indexShape5
-{
-   left: 23px;
-   top: 599px;
-   width: 274px;
-   height: 30px;
+   left: 10px;
+   top: 455px;
    visibility: visible;
    display: inline;
    margin: 0;
 }
-#indexShape5
+#wb_indexText5
 {
-   width: 270px;
+   left: 10px;
+   top: 437px;
+   width: 257px;
+   height: 16px;
+   visibility: visible;
+   display: inline;
+   background-color: transparent;
+   background-image: none;
+}
+#wb_indexText5
+{
+   margin: 0;
+   padding: 0;
+}
+#wb_indexShape2
+{
+   left: 10px;
+   top: 632px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
+}
+#wb_indexShape4
+{
+   left: 10px;
+   top: 810px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
+}
+#wb_indexImage1
+{
+   left: 15px;
+   top: 455px;
+   width: 77px;
+   height: 64px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
+   padding: 0;
+}
+#wb_indexImage2
+{
+   left: 231px;
+   top: 454px;
+   width: 77px;
+   height: 66px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
+   padding: 0;
+}
+#wb_indexText6
+{
+   left: 15px;
+   top: 519px;
+   width: 77px;
    height: 26px;
-}
-#wb_Text7
-{
-   left: 23px;
-   top: 368px;
-   width: 274px;
-   height: 208px;
    visibility: visible;
    display: inline;
    background-color: transparent;
    background-image: none;
 }
-#wb_Text7
+#wb_indexText6
 {
    margin: 0;
    padding: 0;
 }
-#wb_Text6
+#wb_indexText7
 {
-   left: 29px;
-   top: 605px;
-   width: 237px;
-   height: 19px;
+   left: 235px;
+   top: 520px;
+   width: 73px;
+   height: 26px;
    visibility: visible;
    display: inline;
    background-color: transparent;
    background-image: none;
 }
-#wb_Text6
+#wb_indexText7
 {
    margin: 0;
    padding: 0;
 }
-#wb_Image5
+#wb_indexText8
 {
-   left: 39px;
-   top: 327px;
-   width: 135px;
-   height: 188px;
-   visibility: hidden;
-   display: none;
-   margin: 0;
-   padding: 0;
-}
-#wb_Image6
-{
-   left: 27px;
-   top: 503px;
-   width: 135px;
-   height: 188px;
-   visibility: hidden;
-   display: none;
-   margin: 0;
-   padding: 0;
-}
-#wb_Shape5
-{
-   left: 28px;
-   top: 606px;
-   visibility: hidden;
-   display: none;
-   margin: 0;
-}
-#wb_Text8
-{
-   left: 69px;
-   top: 917px;
-   width: 183px;
+   left: 121px;
+   top: 466px;
+   width: 81px;
    height: 42px;
    visibility: visible;
    display: inline;
    background-color: transparent;
    background-image: none;
 }
-#wb_Text8
+#wb_indexText8
 {
    margin: 0;
    padding: 0;
 }
-#wb_indexShape4
+#indexButton6
 {
-   left: 23px;
-   top: 323px;
-   width: 274px;
-   height: 30px;
+   left: 110px;
+   top: 537px;
+   width: 105px;
+   height: 27px;
    visibility: visible;
    display: inline;
    margin: 0;
 }
-#indexShape4
+#wb_indexJavaScript1
 {
-   width: 270px;
+   left: 19px;
+   top: 583px;
+   width: 286px;
+   height: 22px;
+   visibility: visible;
+   display: inline;
+}
+#wb_indexJavaScript2
+{
+   left: 18px;
+   top: 759px;
+   width: 288px;
    height: 26px;
+   visibility: visible;
+   display: inline;
 }
-#wb_Text9
+#wb_indexImage3
 {
-   left: 23px;
-   top: 643px;
-   width: 274px;
-   height: 240px;
+   left: 21px;
+   top: 635px;
+   width: 65px;
+   height: 65px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
+   padding: 0;
+}
+#wb_indexImage4
+{
+   left: 243px;
+   top: 640px;
+   width: 56px;
+   height: 54px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
+   padding: 0;
+}
+#wb_indexText9
+{
+   left: 120px;
+   top: 810px;
+   width: 81px;
+   height: 42px;
    visibility: visible;
    display: inline;
    background-color: transparent;
    background-image: none;
 }
-#wb_Text9
+#wb_indexText9
 {
    margin: 0;
    padding: 0;
 }
-#wb_Text10
+#wb_indexText10
 {
-   left: 32px;
-   top: 329px;
-   width: 230px;
-   height: 19px;
+   left: 15px;
+   top: 519px;
+   width: 77px;
+   height: 26px;
    visibility: visible;
    display: inline;
    background-color: transparent;
    background-image: none;
 }
-#wb_Text10
+#wb_indexText10
 {
    margin: 0;
    padding: 0;
 }
-#wb_Image1
+#wb_indexText11
 {
-   left: 1px;
-   top: 16px;
-   width: 73px;
-   height: 73px;
-   visibility: visible;
-   display: inline;
-   margin: 0;
-   padding: 0;
-}
-#wb_indexText1
-{
-   left: 642px;
-   top: 132px;
-   width: 129px;
-   height: 18px;
-   visibility: hidden;
-   display: none;
-   background-color: transparent;
-   background-image: none;
-}
-#wb_indexText1
-{
-   margin: 0;
-   padding: 0;
-}
-#NavigationBar1
-{
-   left: 23px;
-   top: 128px;
-   visibility: visible;
-   display: inline;
-   margin: 0;
-}
-#wb_indexText3
-{
-   left: 0px;
-   top: 31px;
-   width: 320px;
-   height: 58px;
+   left: 15px;
+   top: 519px;
+   width: 77px;
+   height: 26px;
    visibility: visible;
    display: inline;
    background-color: transparent;
    background-image: none;
 }
-#wb_indexText3
+#wb_indexText11
 {
    margin: 0;
    padding: 0;
 }
-#wb_indexImage1
+#wb_indexText12
 {
-   left: 64px;
-   top: 408px;
-   width: 202px;
-   height: 221px;
+   left: 122px;
+   top: 646px;
+   width: 81px;
+   height: 42px;
    visibility: visible;
    display: inline;
-   margin: 0;
-   padding: 0;
-}
-#wb_indexCaptcha1
-{
-   left: 93px;
-   top: 1015px;
-   width: 145px;
-   height: 100px;
-   visibility: visible;
-   display: inline;
-   margin: 0;
-   padding: 1px 1px 1px 1px;
-   text-align: left;
-   color: #000000;
-   font-size: 13px;
-   font-family: Arial;
-   font-weight: normal;
-   font-style: normal;
-   text-decoration: none;
-   background-color: #FFFFFF;
+   background-color: transparent;
    background-image: none;
-   border-radius: 4px;
+}
+#wb_indexText12
+{
+   margin: 0;
+   padding: 0;
+}
+#indexButton8
+{
+   left: 110px;
+   top: 695px;
+   width: 105px;
+   height: 27px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
 }
 }
 </style>
@@ -992,64 +1317,132 @@ body
 <div id="indexShape3"></div></div>
 <div id="wb_Shape1">
 <div id="Shape1"></div></div>
-<div id="wb_Shape2">
-<div id="Shape2"></div></div>
-<div id="wb_Shape4">
-<div id="Shape4"></div></div>
-<div id="NavigationBar2">
-<ul class="navbar">
-<li><a href="http://"><img alt="" src="images/img0006_over.gif" class="hover"><span><img alt="" src="images/img0006.gif"></span></a></li>
-<li><a href="http://"><img alt="" src="images/img0007_over.gif" class="hover"><span><img alt="" src="images/img0007.gif"></span></a></li>
-<li><a href="http://"><img alt="" src="images/img0008_over.gif" class="hover"><span><img alt="" src="images/img0008.gif"></span></a></li>
-<li><a href="http://"><img alt="" src="images/img0009_over.gif" class="hover"><span><img alt="" src="images/img0009.gif"></span></a></li>
-<li><a href="http://"><img alt="" src="images/img0010_over.gif" class="hover"><span><img alt="" src="images/img0010.gif"></span></a></li>
-<li><a href="http://"><img alt="" src="images/img0011_over.gif" class="hover"><span><img alt="" src="images/img0011.gif"></span></a></li>
-</ul>
-</div>
-<div id="wb_indexShape1">
-<img src="images/img0012.png" id="indexShape1" alt=""></div>
-<div id="wb_Text2">
-<span style="color:#FFFFFF;font-family:Arial;font-size:29px;"><strong>Welcome to our company</strong></span></div>
-<div id="wb_indexShape5">
-<div id="indexShape5"></div></div>
-<div id="wb_Text7">
-<span style="color:#003264;font-family:Arial;font-size:16px;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</span></div>
-<div id="wb_Text6">
-<span style="color:#FFFFFF;font-family:Arial;font-size:20px;"><strong>News &amp; Events</strong></span></div>
-<div id="wb_Image5">
-<img src="images/wwb_nyny2.jpg" id="Image5" alt=""></div>
-<div id="wb_Image6">
-<img src="images/wwb_nyny3.jpg" id="Image6" alt=""></div>
-<div id="wb_Shape5">
-<img src="images/img0014.gif" id="Shape5" alt=""></div>
-<div id="wb_Text8">
-<span style="color:#003264;font-family:Arial;font-size:13px;">Copyright © 2014 by &quot;Your Name&quot;<br>All Rights reserved<br>E-Mail: yourname@yourdomain.com</span></div>
-<div id="wb_indexShape4">
-<div id="indexShape4"></div></div>
-<div id="wb_Text9">
-<span style="color:#003264;font-family:Arial;font-size:16px;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue. Duis autem vel eum iriure dolor in hendrerit in vulputate.</span></div>
-<div id="wb_Text10">
-<span style="color:#FFFFFF;font-family:Arial;font-size:20px;"><strong>Our Services</strong></span></div>
 <div id="wb_Image1">
 <img src="images/Doc2%2d1.jpg" id="Image1" alt=""></div>
-<div id="wb_indexText1">
-<span style="color:#FFFFFF;font-family:Arial;font-size:11px;"><strong><em>Designed by GOEMO</em></strong></span><span style="color:#FF8000;font-family:Arial;font-size:20px;"><strong><em>.</em></strong></span><span style="color:#FFFFFF;font-family:Arial;font-size:11px;"><strong><em>de</em></strong></span></div>
 <div id="NavigationBar1">
 <ul class="navbar">
-<li><a href="http://"><img alt="" src="images/img0016_over.gif" class="hover"><span><img alt="" src="images/img0016.gif"></span></a></li>
-<li><a href="http://"><img alt="" src="images/img0017_over.gif" class="hover"><span><img alt="" src="images/img0017.gif"></span></a></li>
-<li><a href="http://"><img alt="" src="images/img0018_over.gif" class="hover"><span><img alt="" src="images/img0018.gif"></span></a></li>
-<li><a href="http://"><img alt="" src="images/img0019_over.gif" class="hover"><span><img alt="" src="images/img0019.gif"></span></a></li>
-<li><a href="http://"><img alt="" src="images/img0020_over.gif" class="hover"><span><img alt="" src="images/img0020.gif"></span></a></li>
-<li><a href="http://"><img alt="" src="images/img0021_over.gif" class="hover"><span><img alt="" src="images/img0021.gif"></span></a></li>
+<li><a href="./index.html"><img alt="" src="images/img0003_over.png" class="hover"><span><img alt="" src="images/img0003.png"></span></a></li>
+<li><a href="http://"><img alt="My Contests" title="My Contests" src="images/img0004_over.png" class="hover"><span><img alt="My Contests" title="My Contests" src="images/img0004.png"></span></a></li>
+<li><a href="http://"><img alt="All Contests" title="All Contests" src="images/img0005_over.png" class="hover"><span><img alt="All Contests" title="All Contests" src="images/img0005.png"></span></a></li>
+<li><a href="http://"><img alt="" src="images/img0006_over.png" class="hover"><span><img alt="" src="images/img0006.png"></span></a></li>
+<li><a href="http://"><img alt="Contact Us" title="Contact Us" src="images/img0007_over.png" class="hover"><span><img alt="Contact Us" title="Contact Us" src="images/img0007.png"></span></a></li>
 </ul>
 </div>
+<div id="wb_indexText2">
+<span style="color:#800080;font-family:'Times New Roman';font-size:48px;"><strong>FANCET 11</strong></span></div>
+<div id="wb_indexCssMenu1">
+<ul role="menubar">
+<li class="firstmain"><a role="menuitem" href="" target="_self">HOME</a>
+</li>
+<li><a role="menuitem" href="" target="_self">MY&nbsp;CONTESTS</a>
+</li>
+<li><a role="menuitem" href="" target="_self">ALL&nbsp;CONTESTS</a>
+</li>
+<li><a role="menuitem" href="" target="_self">ABOUT&nbsp;US</a>
+</li>
+<li><a role="menuitem" href="" target="_self">CONTACT&nbsp;US</a>
+</li>
+</ul>
+</div>
+<input type="submit" id="indexButton1" name="LOG IN" value="LOG IN">
+<input type="submit" id="indexButton2" name="LOG IN" value="SIGN UP">
+<div id="wb_indexText1">
+<span style="color:#800080;font-family:Arial;font-size:13px;">TEST YOUR KNOWLEDGE OF SPORTS</span></div>
 <div id="wb_indexText3">
-<span style="color:#000000;font-family:Arial;font-size:64px;"><strong>FANCET 11</strong></span></div>
+<span style="color:#FFFFFF;font-family:Arial;font-size:24px;">Test Your Knowledge&nbsp; of sports&nbsp; and Win Upto 1,00,000 in just investing some small amount.</span></div>
+<input type="submit" id="indexButton3" name="How to Play" value="How to Play">
+<input type="submit" id="indexButton4" name="WHY FANCET 11" value="Why FANCET 11?">
+<input type="submit" id="indexButton5" name="WHY FANCET 11" value="Raise Complaint">
+<div id="wb_indexText4">
+&nbsp;</div>
+<div id="wb_indexShape1">
+<img src="images/img0008.png" id="indexShape1" alt=""></div>
+<div id="wb_indexText5">
+<span style="color:#FFFFFF;font-family:Arial;font-size:17px;">UPCOMING MATCHES</span></div>
+<div id="wb_indexShape2">
+<img src="images/img0009.png" id="indexShape2" alt=""></div>
+<div id="wb_indexShape4">
+<img src="images/img0010.png" id="indexShape4" alt=""></div>
 <div id="wb_indexImage1">
-<img src="images/myimage%2dremovebg%2dpreview.png" id="indexImage1" alt=""></div>
-<div id="wb_indexCaptcha1">
-<img src="indexcaptcha1.php" alt="Click for new image" title="Click for new image" style="cursor:pointer;float:left;width:100px;height:38px;" onclick="this.src='indexcaptcha1.php?'+Math.random()">
-<span><input type="text" id="indexCaptcha1" name="captcha_code" value="" spellcheck="false"></span></div>
+<img src="images/chennai_super_kings_logo_freelogovectors.net_.png" id="indexImage1" alt=""></div>
+<div id="wb_indexImage2">
+<img src="images/Mumbai_Indians_Logo.png" id="indexImage2" alt=""></div>
+<div id="wb_indexText6">
+<span style="color:#800080;font-family:Arial;font-size:29px;">CSK</span></div>
+<div id="wb_indexText7">
+<span style="color:#800080;font-family:Arial;font-size:29px;">MI</span></div>
+<div id="wb_indexText8">
+<span style="color:#800080;font-family:Impact;font-size:43px;">Vs</span></div>
+<input type="submit" id="indexButton6" name="PLAY NOW" value="Play Now">
+<div id="wb_indexJavaScript1">
+<div id="countdown"></div>
+<script type="text/javascript">
+var strTargetDate = "09/19/2020 07:00 PM";
+var strFormat = "$DAYS$ Days, $HOURS$ Hours, $MINUTES$ Minutes, $SECONDS$ Seconds";
+var strExpired = "Fantasy Ended";
+
+function doCountDown(seconds) 
+{
+   if (seconds < 0) 
+   {
+      document.getElementById("countdown").innerHTML = strExpired;
+      return;
+   }
+   var strMsg = strFormat;
+   strMsg = strMsg.replace("$DAYS$",    ((Math.floor(seconds/86400))%100000).toString());
+   strMsg = strMsg.replace("$HOURS$",   ((Math.floor(seconds/3600))%24).toString());
+   strMsg = strMsg.replace("$MINUTES$", ((Math.floor(seconds/60))%60).toString());
+   strMsg = strMsg.replace("$SECONDS$",  ((Math.floor(seconds))%60).toString()); 
+
+   document.getElementById("countdown").innerHTML = strMsg;
+
+   setTimeout("doCountDown(" + (seconds-1).toString() + ")", 1000);
+}
+function initCountDown()
+{
+   var dtTarget = new Date(strTargetDate);
+   var dtNow = new Date();
+   var dtDiff = new Date(dtTarget-dtNow);
+   var totalSeconds = Math.floor(dtDiff.valueOf()/1000);
+
+   doCountDown(totalSeconds);
+}
+initCountDown();
+</script>
+
+</div>
+<div id="wb_indexJavaScript2">
+<div id="countdown-days"></div>
+<script>
+var endDate = new Date("Sep 20, 2020 19:00:00").getTime();
+var timer = setInterval(function() 
+{
+   var now = new Date().getTime();
+   var diff = endDate - now;
+   var d = Math.floor(diff /  (1000 * 60 * 60 * 24));
+   var h = Math.floor((diff % (1000 *  60 * 60 * 24)) / (1000 * 60 * 60));
+   var m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+   var s = Math.floor((diff % (1000 * 60)) / 1000);
+   document.getElementById("countdown-days").innerHTML = d + "Days, " +  h + "Hours, " + m + "Minutes, " + s + "Seconds ";
+   if (diff < 0) 
+   {
+      clearInterval(timer);
+      document.getElementById("countdown-days").innerHTML  = "Fantasy Ended";
+   }
+}, 1000);
+</script></div>
+<div id="wb_indexImage3">
+<img src="images/1024px%2dDelhi_Capitals_Logo.svg_.png" id="indexImage3" alt=""></div>
+<div id="wb_indexImage4">
+<img src="images/1200px%2dKings_XI_Punjab_logo.svg_.png" id="indexImage4" alt=""></div>
+<div id="wb_indexText9">
+<span style="color:#800080;font-family:Impact;font-size:43px;">Vs</span></div>
+<div id="wb_indexText10">
+<span style="color:#800080;font-family:Arial;font-size:29px;">DC</span></div>
+<div id="wb_indexText11">
+<span style="color:#800080;font-family:Arial;font-size:29px;">KXIP</span></div>
+<div id="wb_indexText12">
+<span style="color:#800080;font-family:Impact;font-size:43px;">Vs</span></div>
+<input type="submit" id="indexButton8" name="PLAY NOW" value="Play Now">
 </body>
 </html>
