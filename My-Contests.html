@@ -1,83 +1,28 @@
 <?php
-$database = './usersdb.php';
-$success_page = '';
-$error_message = "";
-if (!file_exists($database))
+if (session_id() == "")
 {
-   die('User database not found!');
+   session_start();
+}
+if (!isset($_SESSION['username']))
+{
+   $_SESSION['referrer'] = $_SERVER['REQUEST_URI'];
+   header('Location: ');
    exit;
 }
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['form_name']) && $_POST['form_name'] == 'signupform')
+if (isset($_SESSION['expires_by']))
 {
-   $newusername = $_POST['username'];
-   $newemail = $_POST['email'];
-   $newpassword = $_POST['password'];
-   $confirmpassword = $_POST['confirmpassword'];
-   $newfullname = $_POST['fullname'];
-   $code = 'NA';
-   if ($newpassword != $confirmpassword)
+   $expires_by = intval($_SESSION['expires_by']);
+   if (time() < $expires_by)
    {
-      $error_message = 'Password and Confirm Password are not the same!';
+      $_SESSION['expires_by'] = time() + intval($_SESSION['expires_timeout']);
    }
    else
-   if (!preg_match("/^[A-Za-z0-9-_!@$]{1,50}$/", $newusername))
    {
-      $error_message = 'Username is not valid, please check and try again!';
-   }
-   else
-   if (!preg_match("/^[A-Za-z0-9-_!@$]{1,50}$/", $newpassword))
-   {
-      $error_message = 'Password is not valid, please check and try again!';
-   }
-   else
-   if (!preg_match("/^[A-Za-z0-9-_!@$.' &]{1,50}$/", $newfullname))
-   {
-      $error_message = 'Fullname is not valid, please check and try again!';
-   }
-   else
-   if (!preg_match("/^.+@.+\..+$/", $newemail))
-   {
-      $error_message = 'Email is not a valid email address. Please check and try again.';
-   }
-   $items = file($database, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-   foreach($items as $line)
-   {
-      list($username, $password, $email, $fullname) = explode('|', trim($line));
-      if ($newusername == $username)
-      {
-         $error_message = 'Username already used. Please select another username.';
-         break;
-      }
-   }
-   if (empty($error_message))
-   {
-      $file = fopen($database, 'a');
-      fwrite($file, $newusername);
-      fwrite($file, '|');
-      fwrite($file, md5($newpassword));
-      fwrite($file, '|');
-      fwrite($file, $newemail);
-      fwrite($file, '|');
-      fwrite($file, $newfullname);
-      fwrite($file, '|1|');
-      fwrite($file, $code);
-      fwrite($file, "\r\n");
-      fclose($file);
-      $subject = 'Your new account';
-      $message = 'A new account has been setup.';
-      $message .= "\r\nUsername: ";
-      $message .= $newusername;
-      $message .= "\r\nPassword: ";
-      $message .= $newpassword;
-      $message .= "\r\n";
-      $header  = "From: webmaster@yourwebsite.com"."\r\n";
-      $header .= "Reply-To: webmaster@yourwebsite.com"."\r\n";
-      $header .= "MIME-Version: 1.0"."\r\n";
-      $header .= "Content-Type: text/plain; charset=utf-8"."\r\n";
-      $header .= "Content-Transfer-Encoding: 8bit"."\r\n";
-      $header .= "X-Mailer: PHP v".phpversion();
-      mail($newemail, $subject, $message, $header);
-      header('Location: '.$success_page);
+      unset($_SESSION['username']);
+      unset($_SESSION['expires_by']);
+      unset($_SESSION['expires_timeout']);
+      $_SESSION['referrer'] = $_SERVER['REQUEST_URI'];
+      header('Location: ');
       exit;
    }
 }
@@ -225,7 +170,7 @@ input:focus, textarea:focus, select:focus
    width: 100%;
    height: 100%;
 }
-#wb_Sign-UpText1 
+#wb_Log-inText1 
 {
    background-color: transparent;
    background-image: none;
@@ -234,11 +179,11 @@ input:focus, textarea:focus, select:focus
    margin: 0;
    text-align: center;
 }
-#wb_Sign-UpText1 div
+#wb_Log-inText1 div
 {
    text-align: center;
 }
-#wb_Sign-UpText2 
+#wb_Log-inText2 
 {
    background-color: transparent;
    background-image: none;
@@ -247,7 +192,7 @@ input:focus, textarea:focus, select:focus
    margin: 0;
    text-align: center;
 }
-#wb_Sign-UpText2 div
+#wb_Log-inText2 div
 {
    text-align: center;
 }
@@ -346,102 +291,6 @@ input:focus, textarea:focus, select:focus
    font-size: 20px;
    -webkit-appearance: none;
    margin: 0;
-}
-#Sign-UpSignup1
-{
-   background-color: #FFFFFF;
-   border-color:#FFFF57;
-   border-width:1px;
-   border-style: solid;
-   border-radius: 4px;
-   color: #800080;
-   font-family: Arial;
-   font-weight: normal;
-   font-size: 13px;
-   text-align: left;
-   border-spacing: 6px;
-   width: 286px;
-   height: 461px;
-}
-#Sign-UpSignup1 td
-{
-   padding: 0;
-}
-#Sign-UpSignup1 .header
-{
-   background-color: #800080;
-   color: #FFFFFF;
-   height: 16px;
-   padding: 4px 4px 4px 4px;
-   text-align: center;
-}
-#Sign-UpSignup1 .label
-{
-   height: 16px;
-}
-#Sign-UpSignup1 .row
-{
-   height: 30px;
-   text-align: left;
-}
-#Sign-UpSignup1 .input
-{
-   background-color: #000000;
-   border-color: #FFFFFF;
-   border-width: 1px;
-   border-style: solid;
-   border-radius: 3px;
-   color: #800080;
-   font-family: Arial;
-   font-weight: normal;
-   font-size: 13px;
-   width: 100%;
-   height: 30px;
-   box-sizing: border-box;
-   padding: 6px 4px 6px 4px;
-}
-#Sign-UpSignup1 .input:focus
-{
-   border-color: #66AFE9;
-   outline: 0;
-   box-shadow: inset 0px 1px 1px rgba(0,0,0,0.075), 0px 0px 8px rgba(102,175,233,0.60);
-}
-#Sign-UpSignup1 .button
-{
-   background-color: #800080;
-   border-color: #800080;
-   border-width: 1px;
-   border-style: solid;
-   border-radius: 3px;
-   color: #FFFFFF;
-   font-family: Arial;
-   font-weight: normal;
-   font-size: 13px;
-   padding: 4px 14px 4px 14px;
-   -webkit-appearance: none;
-}
-#wb_Log-inText3 
-{
-   background-color: transparent;
-   background-image: none;
-   border: 0px solid #000000;
-   padding: 0;
-   margin: 0;
-   text-align: center;
-}
-#wb_Log-inText3 div
-{
-   text-align: center;
-}
-#wb_Sign-UpText2
-{
-   position: absolute;
-   left: 77px;
-   top: 48px;
-   width: 255px;
-   height: 12px;
-   text-align: center;
-   z-index: 8;
 }
 #wb_Image1
 {
@@ -499,15 +348,6 @@ input:focus, textarea:focus, select:focus
    text-align: center;
    z-index: 1;
 }
-#wb_Sign-UpSignup1
-{
-   position: absolute;
-   left: 457px;
-   top: 172px;
-   width: 286px;
-   height: 461px;
-   z-index: 15;
-}
 #wb_indexText24
 {
    position: absolute;
@@ -540,7 +380,7 @@ input:focus, textarea:focus, select:focus
 {
    position: absolute;
    left: 556px;
-   top: 92px;
+   top: 95px;
    width: 364px;
    height: 43px;
    z-index: 3;
@@ -563,7 +403,17 @@ input:focus, textarea:focus, select:focus
    height: 36px;
    z-index: 12;
 }
-#wb_Sign-UpText1
+#wb_Log-inText2
+{
+   position: absolute;
+   left: 77px;
+   top: 48px;
+   width: 255px;
+   height: 12px;
+   text-align: center;
+   z-index: 8;
+}
+#wb_Log-inText1
 {
    position: absolute;
    left: 72px;
@@ -572,16 +422,6 @@ input:focus, textarea:focus, select:focus
    height: 38px;
    text-align: center;
    z-index: 7;
-}
-#wb_Log-inText3
-{
-   position: absolute;
-   left: 475px;
-   top: 534px;
-   width: 250px;
-   height: 36px;
-   text-align: center;
-   z-index: 16;
 }
 #wb_indexShape3
 {
@@ -710,7 +550,7 @@ body
    margin: 0;
    padding: 0;
 }
-#wb_Sign-UpText1
+#wb_Log-inText1
 {
    left: 65px;
    top: 0px;
@@ -721,12 +561,12 @@ body
    background-color: transparent;
    background-image: none;
 }
-#wb_Sign-UpText1
+#wb_Log-inText1
 {
    margin: 0;
    padding: 0;
 }
-#wb_Sign-UpText2
+#wb_Log-inText2
 {
    left: 69px;
    top: 43px;
@@ -737,7 +577,7 @@ body
    background-color: transparent;
    background-image: none;
 }
-#wb_Sign-UpText2
+#wb_Log-inText2
 {
    margin: 0;
    padding: 0;
@@ -874,40 +714,6 @@ body
 {
    line-height: 29px;
 }
-#wb_Sign-UpSignup1
-{
-   left: 63px;
-   top: 192px;
-   width: 286px;
-   height: 432px;
-   visibility: visible;
-   display: inline;
-   margin: 0;
-}
-#Sign-UpSignup1
-{
-   width: 286px;
-   height: 432px;
-}
-#Sign-UpSignup1
-{
-}
-#wb_Log-inText3
-{
-   left: 83px;
-   top: 537px;
-   width: 250px;
-   height: 36px;
-   visibility: visible;
-   display: inline;
-   background-color: transparent;
-   background-image: none;
-}
-#wb_Log-inText3
-{
-   margin: 0;
-   padding: 0;
-}
 }
 </style>
 </head>
@@ -920,71 +726,24 @@ body
 <div id="wb_indexText24">
 &nbsp;</div>
 <div id="wb_Text2">
-<span style="color:#FFFFFF;font-family:'Lucida Sans Unicode';font-size:35px;"><strong><u>Sign Up</u></strong></span></div>
+<span style="color:#FFFFFF;font-family:'Lucida Sans Unicode';font-size:35px;"><strong><u>My Contests</u></strong></span></div>
 <div id="wb_indexText14">
 <span style="color:#000000;font-family:Arial;font-size:27px;"><strong><br></strong></span><span style="color:#FFFFFF;font-family:Arial;font-size:27px;"><strong>Copyright © FANCET 11 INDIA. All Rights Reserved.</strong></span><span style="color:#000000;font-family:Arial;font-size:27px;"><strong><br><br></strong></span></div>
 <div id="wb_indexShape3">
 <div id="indexShape3"></div></div>
 <div id="wb_Image1">
 <img src="images/Doc2%2d1.jpg" id="Image1" alt=""></div>
-<div id="wb_Sign-UpText1">
+<div id="wb_Log-inText1">
 <span style="color:#800080;font-family:'Times New Roman';font-size:43px;"><strong>FANCET 11</strong></span></div>
-<div id="wb_Sign-UpText2">
+<div id="wb_Log-inText2">
 <span style="color:#800080;font-family:Arial;font-size:13px;">TEST YOUR KNOWLEDGE OF SPORTS</span></div>
 <a id="indexButton9" href="./index.html">Home</a>
-<a id="indexButton12" href="./index.html">My Contests</a>
+<a id="indexButton12" href="./My-Contests.html">My Contests</a>
 <a id="indexButton13" href="./index.html">All Contests</a>
 <a id="indexButton14" href="./index.html">About Us</a>
 <a id="indexButton15" href="./Log-in.html">Log In</a>
 <a id="indexButton16" href="./Sign-Up.html">Sign Up</a>
-<div id="wb_Sign-UpSignup1">
-<form name="signupform" method="post" action="<?php echo basename(__FILE__); ?>" id="signupform">
-<input type="hidden" name="form_name" value="signupform">
-<table id="Sign-UpSignup1">
-<tr>
-   <td class="header">Sign up for a new account</td>
-</tr>
-<tr>
-   <td class="label"><label for="fullname">Full Name</label></td>
-</tr>
-<tr>
-   <td class="row"><input class="input" name="fullname" type="text" id="fullname"></td>
-</tr>
-<tr>
-   <td class="label"><label for="username">User Name</label></td>
-</tr>
-<tr>
-   <td class="row"><input class="input" name="username" type="text" id="username"></td>
-</tr>
-<tr>
-   <td class="label"><label for="password">Password</label></td>
-</tr>
-<tr>
-   <td class="row"><input class="input" name="password" type="password" id="password"></td>
-</tr>
-<tr>
-   <td class="label"><label for="confirmpassword">Confirm Password</label></td>
-</tr>
-<tr>
-   <td class="row"><input class="input" name="confirmpassword" type="password" id="confirmpassword"></td>
-</tr>
-<tr>
-   <td class="label"><label for="email">E-mail</label></td>
-</tr>
-<tr>
-   <td class="row"><input class="input" name="email" type="text" id="email"></td>
-</tr>
-<tr>
-   <td><?php echo $error_message; ?></td>
-</tr>
-<tr>
-   <td style="text-align:center;vertical-align:bottom"><input class="button" type="submit" name="signup" value="Create User" id="signup"></td>
-</tr>
-</table>
-</form>
-</div>
-<div id="wb_Log-inText3">
-<span style="color:#800080;font-family:Arial;font-size:20px;">Already Have an Account, <a href="./Log-in.html">Click Here </a>to Log In</span></div>
+
 </div>
 </body>
 </html>
