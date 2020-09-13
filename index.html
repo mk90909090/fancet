@@ -453,7 +453,7 @@ input:focus, textarea:focus, select:focus
 #wb_indexCssMenu2 li:hover a, #wb_indexCssMenu2 a:hover
 {
    color: #FFFFFF;
-   background-color: #FFFFFF;
+   background-color: #00FF00;
    background-image: none;
    border: 1px solid #2E6DA4;
 }
@@ -1008,6 +1008,19 @@ input:focus, textarea:focus, select:focus
 {
    text-align: center;
 }
+#indexButton1
+{
+   border: 1px solid #FFFF57;
+   border-radius: 5px;
+   background-color: #800080;
+   background-image: none;
+   color: #FFFFFF;
+   font-family: "Arial Narrow";
+   font-weight: normal;
+   font-size: 20px;
+   -webkit-appearance: none;
+   margin: 0;
+}
 #wb_indexCssMenu2
 {
    position: absolute;
@@ -1044,6 +1057,15 @@ input:focus, textarea:focus, select:focus
 {
    width: 372px;
    height: 153px;
+}
+#indexButton1
+{
+   position: absolute;
+   left: 202px;
+   top: 320px;
+   width: 126px;
+   height: 36px;
+   z-index: 68;
 }
 #indexButton9
 {
@@ -1116,24 +1138,6 @@ input:focus, textarea:focus, select:focus
    width: 132px;
    height: 33px;
    z-index: 5;
-}
-#indexHtml2
-{
-   position: absolute;
-   left: 567px;
-   top: 311px;
-   width: 127px;
-   height: 45px;
-   z-index: 69;
-}
-#indexHtml1
-{
-   position: absolute;
-   left: 120px;
-   top: 316px;
-   width: 127px;
-   height: 45px;
-   z-index: 68;
 }
 #wb_indexText14
 {
@@ -1698,8 +1702,8 @@ input:focus, textarea:focus, select:focus
 #wb_indexShape1
 {
    position: absolute;
-   left: 82px;
-   top: 254px;
+   left: 79px;
+   top: 249px;
    width: 372px;
    height: 153px;
    z-index: 9;
@@ -2143,7 +2147,7 @@ body
 #wb_indexCssMenu2 li:hover a, #wb_indexCssMenu2 a:hover
 {
    color: #FFFFFF;
-   background-color: #FFFFFF;
+   background-color: #00FF00;
    background-image: none;
    border: 1px solid #2E6DA4;
 }
@@ -2764,23 +2768,24 @@ body
    margin: 0;
    padding: 0;
 }
-#indexHtml1
+#indexButton1
 {
-   left: 116px;
-   top: 438px;
-   width: 127px;
-   height: 45px;
+   left: 186px;
+   top: 435px;
+   width: 126px;
+   height: 36px;
    visibility: visible;
    display: inline;
-}
-#indexHtml2
-{
-   left: 133px;
-   top: 634px;
-   width: 127px;
-   height: 45px;
-   visibility: visible;
-   display: inline;
+   margin: 0;
+   color: #FFFFFF;
+   font-size: 20px;
+   font-family: "Arial Narrow";
+   font-weight: normal;
+   font-style: normal;
+   text-decoration: none;
+   background-color: #800080;
+   background-image: none;
+   border-radius: 5px;
 }
 }
 </style>
@@ -2889,7 +2894,7 @@ var timer = setInterval(function()
 <span style="color:#800080;font-family:Impact;font-size:43px;">Vs</span></div>
 <div id="wb_indexCssMenu1">
 <ul role="menubar">
-<li class="firstmain"><a role="menuitem" href="" target="_self">Home</a>
+<li class="firstmain"><a role="menuitem" href="./index.html" target="_self">Home</a>
 </li>
 <li><a role="menuitem" href="" target="_self">My&nbsp;Contests</a>
 </li>
@@ -2982,14 +2987,7 @@ var timer = setInterval(function()
 <span style="color:#800080;font-family:Impact;font-size:43px;">Vs</span></div>
 <div id="wb_indexText14">
 <span style="color:#000000;font-family:Arial;font-size:27px;"><strong><br></strong></span><span style="color:#FFFFFF;font-family:Arial;font-size:27px;"><strong>Copyright © FANCET 11 INDIA. All Rights Reserved.</strong></span><span style="color:#000000;font-family:Arial;font-size:27px;"><strong><br><br></strong></span></div>
-<!-- CSK VS MI -->
-<div id="indexHtml1">
-<a href="https://www.instamojo.com/@yadavmithun2001/l73d68be5247f4b26b29bd262ff4100e9/" rel="im-checkout" data-text="Play Now" data-css-style="color:#ffffff; background:#75c26a; width:180px; border-radius:4px"   data-layout="vertical"></a>
-<script src="https://js.instamojo.com/v1/button.js"></script></div>
-<!-- CSK VS MI -->
-<div id="indexHtml2">
-<a href="https://www.instamojo.com/@yadavmithun2001/l88464202563c4ecd965293dc3a931dfd/" rel="im-checkout" data-text="PLay NOW" data-css-style="color:#ffffff; background:#75c26a; width:180px; border-radius:30px"   data-layout="vertical"></a>
-<script src="https://js.instamojo.com/v1/button.js"></script></div>
+<input type="submit" id="indexButton1" name="Play Now" value="Play Now">
 </div>
 </body>
 </html>

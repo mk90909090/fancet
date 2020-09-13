@@ -1,199 +1,579 @@
-<?php
-$database = './usersdb.php';
-$success_page = '';
-$error_message = "";
-if (!file_exists($database))
-{
-   die('User database not found!');
-   exit;
-}
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['form_name']) && $_POST['form_name'] == 'signupform')
-{
-   $newusername = $_POST['username'];
-   $newemail = $_POST['email'];
-   $newpassword = $_POST['password'];
-   $confirmpassword = $_POST['confirmpassword'];
-   $newfullname = $_POST['fullname'];
-   $extra1 = $_POST['extra1'];
-   $code = 'NA';
-   if ($newpassword != $confirmpassword)
-   {
-      $error_message = 'Password and Confirm Password are not the same!';
-   }
-   else
-   if (!preg_match("/^[A-Za-z0-9-_!@$]{1,50}$/", $newusername))
-   {
-      $error_message = 'Username is not valid, please check and try again!';
-   }
-   else
-   if (!preg_match("/^[A-Za-z0-9-_!@$]{1,50}$/", $newpassword))
-   {
-      $error_message = 'Password is not valid, please check and try again!';
-   }
-   else
-   if (!preg_match("/^[A-Za-z0-9-_!@$.' &]{1,50}$/", $newfullname))
-   {
-      $error_message = 'Fullname is not valid, please check and try again!';
-   }
-   else
-   if (!preg_match("/^.+@.+\..+$/", $newemail))
-   {
-      $error_message = 'Email is not a valid email address. Please check and try again.';
-   }
-   else
-   if (strlen($extra1) == 0)
-   {
-      $error_message = 'Field cannot be empty (Mobile Number)';
-   }
-   $items = file($database, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-   foreach($items as $line)
-   {
-      list($username, $password, $email, $fullname) = explode('|', trim($line));
-      if ($newusername == $username)
-      {
-         $error_message = 'Username already used. Please select another username.';
-         break;
-      }
-   }
-   if (empty($error_message))
-   {
-      $file = fopen($database, 'a');
-      fwrite($file, $newusername);
-      fwrite($file, '|');
-      fwrite($file, md5($newpassword));
-      fwrite($file, '|');
-      fwrite($file, $newemail);
-      fwrite($file, '|');
-      fwrite($file, $newfullname);
-      fwrite($file, '|1|');
-      fwrite($file, $code);
-      fwrite($file, '|');
-      fwrite($file, $extra1);
-      fwrite($file, "\r\n");
-      fclose($file);
-      $subject = 'Your new account';
-      $message = 'A new account has been setup.';
-      $message .= "\r\nUsername: ";
-      $message .= $newusername;
-      $message .= "\r\nPassword: ";
-      $message .= $newpassword;
-      $message .= "\r\n";
-      $header  = "From: webmaster@yourwebsite.com"."\r\n";
-      $header .= "Reply-To: webmaster@yourwebsite.com"."\r\n";
-      $header .= "MIME-Version: 1.0"."\r\n";
-      $header .= "Content-Type: text/plain; charset=utf-8"."\r\n";
-      $header .= "Content-Transfer-Encoding: 8bit"."\r\n";
-      $header .= "X-Mailer: PHP v".phpversion();
-      mail($newemail, $subject, $message, $header);
-      header('Location: '.$success_page);
-      exit;
-   }
-}
-?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Untitled Page</title>
-<meta name="generator" content="WYSIWYG Web Builder 15 - http://www.wysiwygwebbuilder.com">
-<link href="FANCET11.css" rel="stylesheet" type="text/css">
-<link href="Sign-Up.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="jquery-1.12.4.min.js"></script>
-<script type="text/javascript" src="affix.min.js"></script>
-<script type="text/javascript">
-$(document).ready(function()
+<title>WWB Template 2</title>
+<meta name="generator" content="WYSIWYG Web Builder - http://www.wysiwygwebbuilder.com">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style type="text/css">
+div#container
 {
-   $("#wb_CssMenu2").affix({offset:{top: $("#wb_CssMenu2").offset().top}});
-   $("#wb_CssMenu1").affix({offset:{top: $("#wb_CssMenu1").offset().top}});
-});
-</script>
+   width: 800px;
+   height: 1790px;
+   margin-top: 0;
+   margin-left: 0;
+   text-align: left;
+}
+body
+{
+   background-color: #800080;
+   color: #000000;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 13px;
+   line-height: 1.1875;
+   margin: 0;
+   padding: 0;
+}
+a
+{
+   color: #0000FF;
+   text-decoration: underline;
+}
+a:visited
+{
+   color: #800080;
+}
+a:active
+{
+   color: #FF0000;
+}
+a:hover
+{
+   color: #0000FF;
+   text-decoration: underline;
+}
+input:focus, textarea:focus, select:focus
+{
+   outline: none;
+}
+@media only screen and (max-width: 799px)
+{
+}
+#wb_indexShape3
+{
+   transform: rotate(0deg);
+   transform-origin: 50% 50%;
+}
+#indexShape3
+{
+   width: 1278px;
+   height: 68px;
+   background-color: #FFFF57;
+   background-image: none;
+   border: 0px #003264 solid;
+}
+#wb_Image1
+{
+   vertical-align: top;
+}
+#Image1
+{
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+#wb_indexText2 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexText2 div
+{
+   text-align: center;
+}
+#wb_indexText1 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexText1 div
+{
+   text-align: center;
+}
+#wb_indexCssMenu1
+{
+   border: 0px solid #800080;
+   background-color: transparent;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexCssMenu1 ul
+{
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+   position: relative;
+   display: inline-block;
+}
+#wb_indexCssMenu1 li
+{
+   float: left;
+   margin: 0;
+   padding: 0px 4px 0px 0px;
+}
+#wb_indexCssMenu1 a
+{
+   display: block;
+   float: left;
+   color: #FFFFFF;
+   border: 0px none #CCCCCC;
+   background-color: #800080;
+   background-image: none;
+   font-family: "Arial Narrow";
+   font-weight: normal;
+   font-size: 19px;
+   font-style: normal;
+   text-decoration: none;
+   height: 25px;
+   line-height: 25px;
+   padding: 0px 5px 0px 5px;
+   vertical-align: middle;
+   text-align: center;
+}
+#wb_indexCssMenu1 li:hover a, #wb_indexCssMenu1 a:hover
+{
+   color: #FFFFFF;
+   background-color: #00FF00;
+   background-image: none;
+   border: 0px none #2E6DA4;
+}
+#wb_indexCssMenu1 li.firstmain
+{
+   padding-left: 0px;
+}
+#wb_indexCssMenu1 li.lastmain
+{
+   padding-right: 0px;
+}
+#wb_indexCssMenu1 br
+{
+   clear: both;
+   font-size: 1px;
+   height: 0;
+   line-height: 0;
+}
+#wb_indexCssMenu2
+{
+   border: 0px solid #C0C0C0;
+   background-color: transparent;
+   margin: 0;
+   text-align: left;
+}
+#wb_indexCssMenu2 ul
+{
+   list-style-type: none;
+   margin: 0;
+   padding: 0;
+   position: relative;
+   display: inline-block;
+}
+#wb_indexCssMenu2 li
+{
+   float: left;
+   margin: 0;
+   padding: 0px 4px 0px 0px;
+}
+#wb_indexCssMenu2 a
+{
+   display: block;
+   float: left;
+   color: #FFFFFF;
+   border: 1px solid #CCCCCC;
+   background-color: #800080;
+   background-image: none;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 13px;
+   font-style: normal;
+   text-decoration: none;
+   height: 26px;
+   line-height: 26px;
+   padding: 0px 5px 0px 5px;
+   vertical-align: middle;
+   text-align: center;
+}
+#wb_indexCssMenu2 li:hover a, #wb_indexCssMenu2 a:hover
+{
+   color: #FFFFFF;
+   background-color: #FFFFFF;
+   background-image: none;
+   border: 1px solid #2E6DA4;
+}
+#wb_indexCssMenu2 li.firstmain
+{
+   padding-left: 0px;
+}
+#wb_indexCssMenu2 li.lastmain
+{
+   padding-right: 0px;
+}
+#wb_indexCssMenu2 br
+{
+   clear: both;
+   font-size: 1px;
+   height: 0;
+   line-height: 0;
+}
+#wb_indexText24 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: left;
+}
+#wb_indexText24 div
+{
+   text-align: left;
+}
+#wb_Text2 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: left;
+}
+#wb_Text2 div
+{
+   text-align: left;
+}
+#wb_indexText14 
+{
+   background-color: transparent;
+   background-image: none;
+   border: 0px solid #000000;
+   padding: 0;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexText14 div
+{
+   text-align: center;
+}
+#wb_indexCssMenu2
+{
+   position: absolute;
+   left: 1086px;
+   top: 19px;
+   width: 132px;
+   height: 32px;
+   z-index: 5;
+}
+#wb_indexCssMenu1
+{
+   position: absolute;
+   left: 543px;
+   top: 20px;
+   width: 492px;
+   height: 30px;
+   z-index: 4;
+}
+#wb_Image1
+{
+   position: absolute;
+   left: 12px;
+   top: 4px;
+   width: 70px;
+   height: 60px;
+   z-index: 1;
+}
+#wb_indexText14
+{
+   position: absolute;
+   left: 28px;
+   top: 1693px;
+   width: 1285px;
+   height: 95px;
+   text-align: center;
+   z-index: 8;
+}
+#wb_indexText1
+{
+   position: absolute;
+   left: 84px;
+   top: 48px;
+   width: 255px;
+   height: 12px;
+   text-align: center;
+   z-index: 3;
+}
+#wb_indexText24
+{
+   position: absolute;
+   left: 556px;
+   top: 906px;
+   width: 250px;
+   height: 12px;
+   z-index: 6;
+}
+#wb_indexText2
+{
+   position: absolute;
+   left: 79px;
+   top: 0px;
+   width: 267px;
+   height: 43px;
+   text-align: center;
+   z-index: 2;
+}
+#wb_Text2
+{
+   position: absolute;
+   left: 556px;
+   top: 92px;
+   width: 364px;
+   height: 43px;
+   z-index: 7;
+}
+#wb_indexShape3
+{
+   position: absolute;
+   left: 0px;
+   top: 0px;
+   width: 1278px;
+   height: 68px;
+   z-index: 0;
+}
+@media only screen and (max-width: 799px)
+{
+div#container
+{
+   width: 320px;
+   height: 1871px;
+}
+body
+{
+   background-color: #800080;
+   background-image: none;
+}
+#wb_indexShape3
+{
+   left: 0px;
+   top: 0px;
+   width: 492px;
+   height: 110px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
+}
+#indexShape3
+{
+   width: 492px;
+   height: 110px;
+}
+#wb_Image1
+{
+   left: 12px;
+   top: 7px;
+   width: 56px;
+   height: 53px;
+   visibility: visible;
+   display: inline;
+   margin: 0;
+   padding: 0;
+}
+#wb_indexText2
+{
+   left: 65px;
+   top: 0px;
+   width: 263px;
+   height: 38px;
+   visibility: visible;
+   display: inline;
+   background-color: transparent;
+   background-image: none;
+}
+#wb_indexText2
+{
+   margin: 0;
+   padding: 0;
+}
+#wb_indexText1
+{
+   left: 69px;
+   top: 43px;
+   width: 255px;
+   height: 12px;
+   visibility: visible;
+   display: inline;
+   background-color: transparent;
+   background-image: none;
+}
+#wb_indexText1
+{
+   margin: 0;
+   padding: 0;
+}
+#wb_indexCssMenu1
+{
+   left: 0px;
+   top: 80px;
+   visibility: visible;
+   display: block;
+   margin: 0;
+   text-align: center;
+}
+#wb_indexCssMenu1 li
+{
+}
+#wb_indexCssMenu1 a
+{
+   color: #FFFFFF;
+   border: 0px none #CCCCCC;
+   background-color: #800080;
+   background-image: none;
+   font-family: "Arial Narrow";
+   font-weight: normal;
+   font-size: 19px;
+   font-style: normal;
+   text-decoration: none;
+   height: 25px;
+   line-height: 25px;
+   text-align: center;
+}
+#wb_indexCssMenu1 li:hover a, #wb_indexCssMenu1 a:hover
+{
+   color: #FFFFFF;
+   background-color: #00FF00;
+   background-image: none;
+   border: 0px none #2E6DA4;
+}
+#wb_indexCssMenu2
+{
+   left: 339px;
+   top: 28px;
+   visibility: visible;
+   display: block;
+   margin: 0;
+   text-align: left;
+}
+#wb_indexCssMenu2 li
+{
+}
+#wb_indexCssMenu2 a
+{
+   color: #FFFFFF;
+   border: 1px solid #CCCCCC;
+   background-color: #800080;
+   background-image: none;
+   font-family: Arial;
+   font-weight: normal;
+   font-size: 13px;
+   font-style: normal;
+   text-decoration: none;
+   height: 26px;
+   line-height: 26px;
+   text-align: center;
+}
+#wb_indexCssMenu2 li:hover a, #wb_indexCssMenu2 a:hover
+{
+   color: #FFFFFF;
+   background-color: #FFFFFF;
+   background-image: none;
+   border: 1px solid #2E6DA4;
+}
+#wb_indexText24
+{
+   left: 242px;
+   top: 408px;
+   width: 250px;
+   height: 12px;
+   visibility: visible;
+   display: inline;
+   background-color: transparent;
+   background-image: none;
+}
+#wb_indexText24
+{
+   margin: 0;
+   padding: 0;
+}
+#wb_Text2
+{
+   left: 151px;
+   top: 118px;
+   width: 320px;
+   height: 43px;
+   visibility: visible;
+   display: inline;
+   background-color: transparent;
+   background-image: none;
+}
+#wb_Text2
+{
+   margin: 0;
+   padding: 0;
+}
+#wb_indexText14
+{
+   left: 6px;
+   top: 1706px;
+   width: 486px;
+   height: 119px;
+   visibility: visible;
+   display: inline;
+   background-color: transparent;
+   background-image: none;
+}
+#wb_indexText14
+{
+   margin: 0;
+   padding: 0;
+}
+}
+</style>
 </head>
 <body>
 <div id="container">
-<div id="wb_Text2" style="position:absolute;left:341px;top:113px;width:360px;height:26px;z-index:4;">
-<span style="color:#FFFFFF;font-family:Arial;font-size:29px;"><strong>FANCET 11 Sign Up Page</strong></span></div>
-<div id="wb_Signup1" style="position:absolute;left:342px;top:155px;width:357px;height:649px;z-index:5;">
-<form name="signupform" method="post" accept-charset="UTF-8" action="<?php echo basename(__FILE__); ?>" id="signupform">
-<input type="hidden" name="form_name" value="signupform">
-<table id="Signup1">
-<tr>
-   <td class="header">Sign up for a new account</td>
-</tr>
-<tr>
-   <td class="label"><label for="fullname">Full Name</label></td>
-</tr>
-<tr>
-   <td class="row"><input class="input" name="fullname" type="text" id="fullname"></td>
-</tr>
-<tr>
-   <td class="label"><label for="username">User Name</label></td>
-</tr>
-<tr>
-   <td class="row"><input class="input" name="username" type="text" id="username"></td>
-</tr>
-<tr>
-   <td class="label"><label for="password">Password</label></td>
-</tr>
-<tr>
-   <td class="row"><input class="input" name="password" type="password" id="password"></td>
-</tr>
-<tr>
-   <td class="label"><label for="confirmpassword">Confirm Password</label></td>
-</tr>
-<tr>
-   <td class="row"><input class="input" name="confirmpassword" type="password" id="confirmpassword"></td>
-</tr>
-<tr>
-   <td class="label"><label for="email">E-mail</label></td>
-</tr>
-<tr>
-   <td class="row"><input class="input" name="email" type="text" id="email"></td>
-</tr>
-<tr>
-   <td class="label"><label for="extra1">Mobile Number</label></td>
-</tr>
-<tr>
-   <td class="row"><input class="input" name="extra1" type="text" id="extra1"></td>
-</tr>
-<tr>
-   <td><?php echo $error_message; ?></td>
-</tr>
-<tr>
-   <td style="text-align:center;vertical-align:bottom"><input class="button" type="submit" name="signup" value="Create User" id="signup"></td>
-</tr>
-</table>
-</form>
-</div>
-<div id="wb_Text3" style="position:absolute;left:383px;top:698px;width:274px;height:16px;z-index:6;">
-<span style="color:#FFFF00;font-family:Arial;font-size:17px;"><strong>Allready Have an Account</strong></span></div>
-<a id="Button1" href="./Log-In.html" style="position:absolute;left:596px;top:693px;width:81px;height:25px;z-index:7;">LOG IN</a>
-</div>
-<div id="PageHeader1" style="position:absolute;text-align:left;left:0px;top:0px;width:100%;height:58px;z-index:7777;">
-<div id="wb_Image1" style="position:absolute;left:12px;top:6px;width:51px;height:44px;z-index:0;">
-<a href="./Home.html"><img src="images/Doc2-1.jpg" id="Image1" alt=""></a></div>
-<div id="wb_Text1" style="position:absolute;left:74px;top:11px;width:195px;height:35px;z-index:1;">
-<span style="color:#800080;font-family:'Diavlo Black';font-size:35px;"><strong><a href="./Home.html">FANCET 11</a></strong></span></div>
-<div id="wb_CssMenu2" style="position:absolute;left:577px;top:12px;width:517px;height:35px;z-index:2;">
+<div id="wb_indexShape3">
+<div id="indexShape3"></div></div>
+<div id="wb_Image1">
+<img src="images/Doc2%2d1.jpg" id="Image1" alt=""></div>
+<div id="wb_indexText2">
+<span style="color:#800080;font-family:'Times New Roman';font-size:43px;"><strong>FANCET 11</strong></span></div>
+<div id="wb_indexText1">
+<span style="color:#800080;font-family:Arial;font-size:13px;">TEST YOUR KNOWLEDGE OF SPORTS</span></div>
+<div id="wb_indexCssMenu1">
 <ul role="menubar">
-<li class="firstmain"><a role="menuitem" href="./Home.html" target="_self">HOME</a>
+<li class="firstmain"><a role="menuitem" href="./index.html" target="_self">Home</a>
 </li>
-<li><a role="menuitem" href="./page6.html" target="_self">MY&nbsp;CONTESTS</a>
+<li><a role="menuitem" href="" target="_self">My&nbsp;Contests</a>
 </li>
-<li><a role="menuitem" href="" target="_self">ALL&nbsp;CONTESTS</a>
+<li><a role="menuitem" href="" target="_self">All&nbsp;Contests</a>
 </li>
-<li><a role="menuitem" href="" target="_self">CONTACT&nbsp;US</a>
-</li>
-<li><a role="menuitem" href="./About-FANCET11.html" target="_self">ABOUT&nbsp;FANCET&nbsp;11</a>
+<li><a role="menuitem" href="" target="_self">About&nbsp;Us</a>
 </li>
 </ul>
 </div>
-<div id="wb_CssMenu1" style="position:absolute;left:1112px;top:13px;width:134px;height:30px;z-index:3;">
+<div id="wb_indexCssMenu2">
 <ul role="menubar">
-<li class="firstmain"><a role="menuitem" href="#" target="_self">LOG&nbsp;IN</a>
+<li class="firstmain"><a role="menuitem" href="./Log-in.html" target="_self" title="LOG IN">LOG&nbsp;IN</a>
 </li>
-<li><a role="menuitem" href="#" target="_self">SIGN&nbsp;UP</a>
+<li><a role="menuitem" href="./Sign-Up.html" target="_self" title="SIGN UP">SIGN&nbsp;UP</a>
 </li>
 </ul>
 </div>
+<div id="wb_indexText24">
+&nbsp;</div>
+<div id="wb_Text2">
+<span style="color:#FFFFFF;font-family:'Lucida Sans Unicode';font-size:35px;"><strong><u>Sign Up</u></strong></span></div>
+<div id="wb_indexText14">
+<span style="color:#000000;font-family:Arial;font-size:27px;"><strong><br></strong></span><span style="color:#FFFFFF;font-family:Arial;font-size:27px;"><strong>Copyright © FANCET 11 INDIA. All Rights Reserved.</strong></span><span style="color:#000000;font-family:Arial;font-size:27px;"><strong><br><br></strong></span></div>
 </div>
 </body>
 </html>
