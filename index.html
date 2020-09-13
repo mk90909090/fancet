@@ -1034,7 +1034,7 @@ input:focus, textarea:focus, select:focus
 {
    position: absolute;
    left: 543px;
-   top: 20px;
+   top: 19px;
    width: 492px;
    height: 30px;
    z-index: 25;
@@ -2789,6 +2789,17 @@ body
 }
 }
 </style>
+<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+<link rel="stylesheet" href="magnificpopup/magnific-popup.css" type="text/css">
+<script type="text/javascript" src="magnificpopup/jquery.magnific-popup.min.js"></script>
+<script type="text/javascript">
+function displaylightbox(url, options)
+{
+   options.items = { src: url };
+   options.type = 'iframe';
+   $.magnificPopup.open(options);
+}
+</script>
 </head>
 <body>
 <div id="container">
@@ -2894,13 +2905,13 @@ var timer = setInterval(function()
 <span style="color:#800080;font-family:Impact;font-size:43px;">Vs</span></div>
 <div id="wb_indexCssMenu1">
 <ul role="menubar">
-<li class="firstmain"><a role="menuitem" href="./index.html" target="_self">Home</a>
+<li class="firstmain"><a role="menuitem" href="./index.html" target="_self" title="home">Home</a>
 </li>
 <li><a role="menuitem" href="" target="_self">My&nbsp;Contests</a>
 </li>
 <li><a role="menuitem" href="" target="_self">All&nbsp;Contests</a>
 </li>
-<li><a role="menuitem" href="./About-Us.html" target="_self">About&nbsp;Us</a>
+<li><a role="menuitem" href="./About-Us.html" target="_self" title="About us">About&nbsp;Us</a>
 </li>
 </ul>
 </div>
@@ -2941,7 +2952,7 @@ var timer = setInterval(function()
 <span style="color:#800080;font-family:Arial;font-size:29px;">MI</span></div>
 <div id="wb_indexText23">
 <span style="color:#800080;font-family:Impact;font-size:43px;">Vs</span></div>
-<a id="indexButton7" href="https://imjo.in/PBrrQT">Play Now</a>
+<a id="indexButton7" href="javascript:displaylightbox('https://imjo.in/PBrrQT',{})" target="_self">Play Now</a>
 <div id="wb_indexText24">
 &nbsp;</div>
 <div id="wb_indexText26">
