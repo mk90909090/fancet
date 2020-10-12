@@ -19,69 +19,21 @@ body
    border-width: 0;
    vertical-align: top;
 }
-#wb_Shape2
-{
-   transform: rotate(0deg);
-   transform-origin: 50% 50%;
-}
-#Shape2
-{
-   border-width: 0;
-   vertical-align: top;
-}
-#wb_Shape3
-{
-   transform: rotate(0deg);
-   transform-origin: 50% 50%;
-}
-#Shape3
-{
-   border-width: 0;
-   vertical-align: top;
-}
 #wb_Shape1
 {
    position: absolute;
-   left: 1180px;
-   top: 98px;
-   width: 111px;
-   height: 47px;
-   z-index: 0;
-}
-#wb_Shape2
-{
-   position: absolute;
    left: 0px;
-   top: 5px;
-   width: 1291px;
-   height: 53px;
-   z-index: 1;
-}
-#wb_Shape3
-{
-   position: absolute;
-   left: 3px;
-   top: 5px;
-   width: 317px;
-   height: 45px;
-   z-index: 2;
+   top: 0px;
+   width: 1294px;
+   height: 56px;
+   z-index: 0;
 }
 #Shape1
 {
-   width: 111px;
-   height: 47px;
+   width: 1294px;
+   height: 56px;
 }
-#Shape2
-{
-   width: 1291px;
-   height: 53px;
-}
-#Shape3
-{
-   width: 317px;
-   height: 45px;
-}
-@media only screen and (max-width: 1290px) and (orientation: landscape)
+@media only screen and (max-width: 1293px)
 {
 body
 {
@@ -90,24 +42,8 @@ body
 }
 #wb_Shape1
 {
-   left: 106px;
-   top: 50px;
-   visibility: visible;
-   display: inline;
-   margin: 0;
-}
-#wb_Shape2
-{
    left: 0px;
-   top: 5px;
-   visibility: hidden;
-   display: none;
-   margin: 0;
-}
-#wb_Shape3
-{
-   left: 3px;
-   top: 5px;
+   top: 0px;
    visibility: visible;
    display: inline;
    margin: 0;
