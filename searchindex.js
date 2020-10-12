@@ -13,7 +13,7 @@ function SearchPage(url, title, keywords, description)
 function SearchDatabase()
 {
    database_length = 0;
-   this[database_length++] = new SearchPage("Home.html", "Untitled Page", "FANCET 11  Test Your Knowledge of Sports Here & Play Contest to Win Upto Rs 100000 in Just Few Moments  Vs  Vs  Vs  Vs  Vs  Vs  Navigate  Support Us  Follow Us  About Us  Copyright © 2020 FANCET 11 Pvt.Ltd  All Rights Reserved   Days,  Hours,  Minutes,  Seconds   ", "");
+   this[database_length++] = new SearchPage("Home.html", "Untitled Page", "FANCET 11  Test Your Knowledge of Sports Here & Play Contest to Win Upto Rs 100000 in Just Few Moments  Vs  Vs  Vs  Vs  Vs  Vs  Navigate  Support Us  Follow Us  About Us  Days,  Hours,  Minutes,  Seconds   ", "");
    this[database_length++] = new SearchPage("How-to-Play.html", "Untitled Page", "FANCET 11  How to Play  Copyright © 2020 FANCET 11 Pvt.Ltd  All Rights Reserved   Navigate  Support Us  Follow Us  About Us   ", "");
    this[database_length++] = new SearchPage("About-FANCET11.html", "Untitled Page", "FANCET 11  About FANCET 11  Copyright © 2020 FANCET 11 Pvt.Ltd  All Rights Reserved   Navigate  Support Us  Follow Us  About Us  MEET THE TEAM   ", "");
    this[database_length++] = new SearchPage("page2.html", "Untitled Page", " ", "");
