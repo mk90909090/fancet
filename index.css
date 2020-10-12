@@ -81,7 +81,7 @@ body
    width: 317px;
    height: 45px;
 }
-@media only screen and (max-width: 1290px)
+@media only screen and (max-width: 1290px) and (orientation: landscape)
 {
 body
 {
